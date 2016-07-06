@@ -22,31 +22,32 @@ Preparing localhost for deploying the temporary mirror of the LFS.
 Testing all the URLs of source packages and retrieving them to the LFS folder.
 
 # Steps
-1. Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the localhost Linux.
-    > 
-    The standards we shall follow as closely as possible:
-    >> 
-    POSIX.1-2008.
-    >> 
-    Filesystem Hierarchy Standard (FHS) Version 3.0
-    >> 
-    Linux Standard Base (LSB) Version 5.0
-2. Package the local tiny Linux into a Distribution and optimize it for ***VM*** usages.
-3. Integrate and test it with other popular open source tools like MariaDB/Apache to form an avaliable Linux for usage or teaching.
+- Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the localhost Linux.
+
+> The standards we shall follow as closely as possible:
+>> 
+POSIX.1-2008.
+>> 
+Filesystem Hierarchy Standard (FHS) Version 3.0
+>> 
+Linux Standard Base (LSB) Version 5.0
+
+- Package the local tiny Linux into a Distribution and optimize it for ***VM*** usages.
+- Integrate and test it with other popular open source tools like MariaDB/Apache to form an avaliable Linux for usage or teaching.
 
 # Need Your Help
-1. You may fork it and create your Linux as your favor.
-2. Any Problems and questions, **please create an issue**, and we may discuss it and solve it.
+- You may fork it and create your Linux as your favor.
+- Any Problems and questions, **please create an issue**, and we may discuss it and solve it.
 
 # Requirements for Partcipators
 > 
 No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 
-1. First thing first, `git` and `GitHub`.
-2. AMD64 localhost, VT or VT-x better.
-3. VM Platform, KVM better.
+- First thing first, `git` and `GitHub`.
+- AMD64 localhost, VT or VT-x better.
+- VM Platform, KVM better.
 > If your localhost is Windows you may first deploy a Linux in VM as the platform for developing, recommending `Ubuntu`, a really friendly Linux with `apt`.
-4. For developing, you should have some basic knowings about `OS`/`Linux`/`C`/`bash`, you may learn them from:
+- For developing, you should have some basic knowings about `OS`/`Linux`/`C`/`bash`, you may learn them from:
 > 
 **Computer Systems: A Programmer's Perspective** -  Randal E.Bryant
 > 
