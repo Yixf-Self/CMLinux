@@ -16,11 +16,11 @@ So join us, and you will learn and build your Linux for yor *VM*
 1. Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the localhost Linux.
 > 
 The standards we shall follow as closely as possible:
-> > 
+>> 
 POSIX.1-2008.
-> >
+>>
 Filesystem Hierarchy Standard (FHS) Version 3.0
-> >
+>>
 Linux Standard Base (LSB) Version 5.0
 2. Package the local tiny Linux into a Distribution and optimize it for ***VM*** usages.
 3. Integrate and test it with other popular open source tools like MariaDB/Apache to form an avaliable Linux for usage or teaching.
