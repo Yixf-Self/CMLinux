@@ -34,3 +34,38 @@ Recommending write it in the .bash_profile
     wget --input-file=./resources/src_pkg_wget.list --continue --directory-prefix=$LFS/sources
     wget --input-file=./resources/src_patch_wget.list --continue --directory-prefix=$LFS/sources
 ```
+- For the last process of the localhost preparing, you may create a directory in $LFS for the installation of the temporary tools, add an unprivileged user to reduce risk, and create an
+appropriate build environment for that user. Please run the commands in **su** mode
+```bash
+    mkdir -v $LFS/tools
+    ln -sv $LFS/tools /
+    groupadd lfs
+    useradd -s /bin/bash -g lfs -m -k /dev/null lfs
+    passwd lfs # Give the user lfs a passwd
+    chown -v lfs $LFS/tools
+    chown -v lfs $LFS/sources
+```
+Change your user into **lfs**, and we shall prepare some bash profiles.
+```bash
+    su - lfs
+    echo "exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash" > ~/.bash_profile
+    echo "set +h
+```
+Make a `.bashrc` profile for user `lfs` initializting with these setting lines, you may `echo` the list into `~/.bashrc` like `echo <list> > ~/.bashrc` to create it
+```bash
+    umask 022
+    LFS=/mnt/lfs
+    LC_ALL=POSIX
+    LFS_TGT=$(uname -m)-lfs-linux-gnu
+    PATH=/tools/bin:/bin:/usr/bin
+    export LFS LC_ALL LFS_TGT PATH
+```
+Finally, to have the environment fully prepared for building the temporary tools, source the just-created user profile:
+```bash
+    . ~/.bash_profile
+```
+
+***Now, you have completed all the preparing process for the localhost, well done.***
+
+---
+01-localhost.md - 0.8.20160707
