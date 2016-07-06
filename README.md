@@ -14,6 +14,7 @@ So join us, and you will learn and build your Linux for yor *VM*
 
 # Steps
 1. Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the localhost Linux.
+
 > 
 The standards we shall follow as closely as possible:
 >> 
@@ -36,8 +37,10 @@ No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 1. First thing first, `git` and `GitHub`.
 2. AMD64 localhost, VT or VT-x better.
 3. VM Platform, KVM better.
+
 > If your localhost is Windows you may first deploy a Linux in VM as the platform for developing.
 4. For developing, you should have some basic knowings about `OS`/`Linux`/`C`/`bash`, you may learn them from:
+
 > 
 **Computer Systems: A Programmer's Perspective** -  Randal E.Bryant
 > 
