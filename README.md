@@ -12,7 +12,7 @@ Our LFS need to satisfy the LSB Requirements by integrating these paskages:
 > 
 Bash, Bc, Binutils, Coreutils, Diffutils, File, Findutils, Gawk, Grep, GTK+2, Gzip, M4, Man-DB, Ncurses, Procps, Psmisc, Sed, Shadow, Tar, Util-linux, Zlib
 >
-So join us, and you will learn and build your Linux for yor *VM*
+So join us, and you will learn and build your Linux for your *VM*
 
 # Project Progress
 20160706
@@ -46,8 +46,11 @@ No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 - First thing first, `git` and `GitHub`.
 - AMD64 localhost, VT or VT-x better.
 - VM Platform, KVM better.
+
 > If your localhost is Windows you may first deploy a Linux in VM as the platform for developing, recommending `Ubuntu`, a really friendly Linux with `apt`.
+
 - For developing, you should have some basic knowings about `OS`/`Linux`/`C`/`bash`, you may learn them from:
+
 > 
 **Computer Systems: A Programmer's Perspective** -  Randal E.Bryant
 > 
