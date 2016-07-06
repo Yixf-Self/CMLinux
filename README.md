@@ -12,7 +12,14 @@ Bash, Bc, Binutils, Coreutils, Diffutils, File, Findutils, Gawk, Grep, GTK+2, Gz
 So join us, and you will learn and build your Linux for yor *VM*
 
 # Steps
-1. Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the current Linux Kernel.
+1. Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the localhost Linux.
+> 
+The standards we shall follow as closely as possible:
+> > POSIX.1-2008.
+> >
+Filesystem Hierarchy Standard (FHS) Version 3.0
+> >
+Linux Standard Base (LSB) Version 5.0
 2. Package the local tiny Linux into a Distribution and optimize it for ***VM*** usages.
 3. Integrate and test it with other popular open source tools like MariaDB/Apache to form an avaliable Linux for usage or teaching.
 
@@ -21,14 +28,16 @@ So join us, and you will learn and build your Linux for yor *VM*
 2. Any Problems and questions, **create an issue**, and we may discuss it and solve it.
 
 # Requirements for Partcipators
-> No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
+> 
+No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 
 1. First thing first, `git` and `GitHub`.
 2. AMD64 localhost, VT or VT-x better.
 3. VM Platform, KVM better.
 > If your localhost is Windows you may first deploy a Linux in VM as the platform for developing.
 4. For developing, you should have some basic knowings about `OS`/`Linux`/`C`/`bash`, you may learn them from:
-> **Computer Systems: A Programmer's Perspective** -  Randal E.Bryant
+> 
+**Computer Systems: A Programmer's Perspective** -  Randal E.Bryant
 > 
 **Linux System Programming** - Robert Love 
 5. For writing documents, you shall have some knowings about `Markdown`.
