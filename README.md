@@ -28,7 +28,7 @@ Linux Standard Base (LSB) Version 5.0
 
 # Need Your Help
 1. You may fork it and create your Linux as your favor.
-2. Any Problems and questions, **create an issue**, and we may discuss it and solve it.
+2. Any Problems and questions, **please create an issue**, and we may discuss it and solve it.
 
 # Requirements for Partcipators
 > 
@@ -38,7 +38,7 @@ No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 2. AMD64 localhost, VT or VT-x better.
 3. VM Platform, KVM better.
 
-> If your localhost is Windows you may first deploy a Linux in VM as the platform for developing.
+> If your localhost is Windows you may first deploy a Linux in VM as the platform for developing, recommending `Ubuntu`, a really friendly Linux with `apt`.
 4. For developing, you should have some basic knowings about `OS`/`Linux`/`C`/`bash`, you may learn them from:
 
 > 
