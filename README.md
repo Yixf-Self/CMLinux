@@ -15,11 +15,8 @@ Bash, Bc, Binutils, Coreutils, Diffutils, File, Findutils, Gawk, Grep, GTK+2, Gz
 So join us, and you will learn and build your Linux for your *VM*
 
 # Project Progress
-20160706
-> 
-Preparing localhost for deploying the temporary mirror of the LFS.
->
-Testing all the URLs of source packages and retrieving them to the LFS folder.
+- 20160707  
+    - Starting the build process of a minimal Linux System.
 
 # Steps
 - Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the localhost Linux.
