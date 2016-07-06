@@ -36,7 +36,5 @@ such as $LFS/sources/. **Do not put sources in $LFS/tools/**.
 | ------------- |-------------
 | binutils      | 2.26
 
-
-
 ***Now, you have got the basic knowings of the building process, let us start it from zero to hero.***
 
