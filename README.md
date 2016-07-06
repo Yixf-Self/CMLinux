@@ -60,7 +60,7 @@ No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 
 # *Enjoy Yourself*
 
-Cherry Mill - My Original build of CMLinux is on `Ubuntu Kylin` with `VS Code` and `bash`.
+Cherry Mill - My Original build of CMLinux is performed on `Ubuntu Kylin` with `VS Code` and `bash`.
 
 ![build_env_sample](/resources/build_env_sample.png)
 
