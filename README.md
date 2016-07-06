@@ -3,7 +3,8 @@ DIY a really tiny Linux from Sctrach
 
 Build a Linux with from **zero** to **hero**, we may follow the oringinal book of [Linux-From-Sctrach](http://www.linuxfromscratch.org/lfs/downloads/stable/LFS-BOOK-7.9-NOCHUNKS.html) version 7.9 to build a tiny but strong Linux, and I shall call it as CMLinux.
 
-> Our Goal is to make a Linux-From-Sctrach with basic tools and keeps it with high perfermance for ***VM*** usage.
+> 
+Our Goal is to make a Linux-From-Sctrach with basic tools and keeps it with high perfermance for ***VM*** usage.
 > 
 Our LFS need to satisfy the LSB Requirements by integrating these paskages:
 > 
@@ -15,7 +16,8 @@ So join us, and you will learn and build your Linux for yor *VM*
 1. Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the localhost Linux.
 > 
 The standards we shall follow as closely as possible:
-> > POSIX.1-2008.
+> > 
+POSIX.1-2008.
 > >
 Filesystem Hierarchy Standard (FHS) Version 3.0
 > >
