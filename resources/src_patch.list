@@ -1,0 +1,30 @@
+Bash Upstream Fixes Patch - 15 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/bash-4.3.30-upstream_fixes-3.patch
+MD5 sum: e183ab08f0a51a7c5a2e974eb1ecbc46
+Bc Memory Leak Patch - 1.4 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/bc-1.06.95-memory_leak-1.patch
+MD5 sum: 877e81fba316fe487ec23501059d54b8
+Binutils Upstream Patch - 13 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/binutils-2.26-upstream_fix-2.patch
+MD5 sum: 33662839ab819acb58796c4c2db20631
+Bzip2 Documentation Patch - 1.6 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/bzip2-1.0.6-install_docs-1.patch
+MD5 sum: 6a5ac7e89b791aae556de0f745916f7f
+Coreutils Internationalization Fixes Patch - 146 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/coreutils-8.25-i18n-2.patch
+MD5 sum: c6334ed5b03062ef7e9649e8ceb2cfc1
+Glibc FHS Patch - 2.8 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/glibc-2.23-fhs-1.patch
+MD5 sum: 9a5997c3452909b1769918c759eff8a2
+Kbd Backspace/Delete Fix Patch - 12 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/kbd-2.0.3-backspace-1.patch
+MD5 sum: f75cca16a38da6caa7d52151f7136895
+MPFR Upstream Fixes Patch - 138 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/mpfr-3.1.3-upstream_fixes-2.patch
+MD5 sum: ef2f0b72f7e2dcc7775303bd3b850bca
+Readline Upstream Fixes Patch - 8 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/readline-6.3-upstream_fixes-3.patch
+MD5 sum: 6b0d9f4e79319d56a7fee9b35e5cfd1b
+Sysvinit Consolidated Patch - 3.9 KB:
+Download: http://www.linuxfromscratch.org/patches/lfs/7.9/sysvinit-2.88dsf-consolidated-1.patch
+MD5 sum: 0b7b5ea568a878fdcc4057b2bf36e5cb
