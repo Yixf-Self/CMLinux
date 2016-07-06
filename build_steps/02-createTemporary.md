@@ -19,3 +19,24 @@ not a problem, but does prompt the warning.
 ```bash
     echo $LFS
 ```
+## General Build Process for Each Package
+- Place all the sources and patches in a directory that will be accessible from the chroot environment
+such as $LFS/sources/. **Do not put sources in $LFS/tools/**.
+- Change to the sources directory.
+- For each package: 
+    - Using the `tar` program, extract the package to be built. **Ensure you are the lfs user
+        when extracting the package.**
+    - Change to the directory created when the package was extracted.
+    - Follow the instructions for building the package.
+    - Change back to the sources directory and delete the extracted source directory unless instructed otherwise.
+
+***Before each package, there shall be a simple table for its name and version, sample:***
+
+| package       | Version       
+| ------------- |-------------
+| binutils      | 2.26
+
+
+
+***Now, you have got the basic knowings of the building process, let us start it from zero to hero.***
+
