@@ -16,6 +16,10 @@ So join us, and you will learn and build your Linux for yor *VM*
 2. Package the local tiny Linux into a Distribution and optimize it for ***VM*** usages.
 3. Integrate and test it with other popular open source tools like MariaDB/Apache to form an avaliable Linux for usage or teaching.
 
+# Need Your Help
+1. You may fork it and create your Linux as your favor.
+2. Any Problems and questions, **create an issue**, and we may discuss it and solve it.
+
 # Requirements for Partcipators
 > No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 
