@@ -1,5 +1,7 @@
 # time_log
 
+- 20160708
+    - Fatal error on `libtinfo.so.5`, fallback to debug
 - 20160707
     - Comleting the build of the temporary system.
     - Encountr a error when pending `perl`, cannot link ***libtinfo.so.5***, preparing backup and experiental settings  
