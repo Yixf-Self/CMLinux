@@ -21,4 +21,14 @@ the files therein, thus exposing these files to possible malicious manipulation.
     mknod -m 666 $LFS/dev/null c 1 3
 ```
 - ***Mounting to the localhost***
-
+```bash
+    mount -v --bind /dev $LFS/dev
+    mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
+    mount -vt proc proc $LFS/proc
+    mount -vt sysfs sysfs $LFS/sys
+    mount -vt tmpfs tmpfs $LFS/run
+    if [ -h $LFS/dev/shm ]; then
+        mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+    fi
+```
+- Enter the chroot environment to begin building and installing `the final LFS system`
