@@ -16,7 +16,8 @@ So join us, and you will learn and build your Linux for your *VM*
 
 # Project Progress
 - 20160707  
-    - Starting the build process of a minimal Linux System.
+    - Comleting the build of the temporary system.
+    - Some bugs shall be repaired
 
 # Steps
 - Form all scripts for installing and integrating a tiny and strong Linux in ***localhost*** starting with the localhost Linux.
