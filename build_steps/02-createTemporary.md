@@ -434,7 +434,7 @@ Compilation is now complete. As discussed earlier, running the test suite is not
 ```
 The result may shown as below, and watch for failures:
 
-[tcl_test_result](/resources/tcl_test_result.png)
+![tcl_test_result](/resources/tcl_test_result.png)
 
 Install the package:
 ```bash
