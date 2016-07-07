@@ -32,3 +32,11 @@ the files therein, thus exposing these files to possible malicious manipulation.
     fi
 ```
 - Enter the chroot environment to begin building and installing `the final LFS system`
+```bash
+    chroot "$LFS" /tools/bin/env -i \
+    HOME=/root                  \
+    TERM="$TERM"                \
+    PS1='\u:\w\$ '              \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
+    /tools/bin/bash --login +h
+```

@@ -1,6 +1,7 @@
 # time_log
 
 - 20160708
+    - Re-base the building process towards `Cent OS`, deploying the Virtual Machine for build
     - Fatal error on `libtinfo.so.5`, fallback to debug
 - 20160707
     - Comleting the build of the temporary system.
