@@ -202,3 +202,21 @@ When the process is done, compile and install:
     make
     make install
 ```
+## linux-4.4.2 API Headers
+The Linux API Headers (in linux-4.4.2.tar.xz) expose the kernel's API for use by glibc.
+
+| package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| linux-4.4.2 API Headers       |     | linux-4.4.2.tar.xz
+
+The Linux Kernel needs to expose an Application Programming Interface (API) for the system's C library (glibc in our LFS) to use. This is done by way of sanitizing various C header files that are shipped in the Linux Kernel source tarball.
+
+Make sure there are no stale files embedded in the package:
+```bash
+    make mrproper
+```
+Now extract the user-visible kernel headers from the source. They are placed in an intermediate local directory and copied to the needed location because the extraction process removes any existing files in the target directory.
+```bash
+    make INSTALL_HDR_PATH=dest headers_install
+    cp -rv dest/include/* /tools/include
+```
