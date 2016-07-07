@@ -540,7 +540,7 @@ Prepare ncurses for compilation, then build/ install:
     make
     make install
 ```
-## bash-4.3.30.tar.gz
+## bash-4.3.30
 The bash package contains the ***Bourne-Again Shell***.
 
 | Package       | Version       | Package Name
@@ -556,3 +556,319 @@ Prepare bash package for compilation, then build/ test/ install, and make a symb
     ln -sv bash /tools/bin/sh
 ```
 ![bash_build](/resources/bash_build.png)
+
+## bzip2-1.0.6
+The bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| bzip2         | 1.0.6         | bzip2-1.0.6.tar.gz
+
+The Bzip2 package does not contain a `configure` script. Compile and build it directly:
+```bash
+    make
+    make PREFIX=/tools install
+```
+## coreutils-8.25.tar.xz
+The coreutils package contains utilities for showing and setting the basic system characteristics.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| coreutils     | 8.25          | coreutils-8.25.tar.xz
+
+Prepare coreutils for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools --enable-install-program=hostname
+    make
+    make RUN_EXPENSIVE_TESTS=yes check
+    make install
+```
+
+## diffutils-3.3
+
+The diffutils package contains programs that show the differences between files or directories.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| diffutils     | 3.3           | diffutils-3.3.tar.xz
+
+Prepare diffutils for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+
+---
+***Encountering a bug for Ubuntu64***
+## file-5.25
+
+The file package contains a utility for determining the type of a given file or files.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| file          | 5.25          | file-5.25.tar.gz
+
+Prepare file for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+---
+## findutils-4.6.0
+
+The findutils package contains programs to find files. These programs are provided to recursively search through a directory tree and to create, maintain, and search a database (often faster than the recursive find, but unreliable if the database has not been recently updated).
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| findutils     | 4.6.0         | findutils-4.6.0.tar.gz
+
+Prepare findutils for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+## gawk-4.1.3
+
+The gawk package contains programs for manipulating text files.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| gawk          | 4.1.3         | gawk-4.1.3.tar.xz
+
+Prepare gawk for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+## gettext-0.19.7
+
+The gettext package contains utilities for internationalization and localization.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| gettext       | 0.19.7        | gettext-0.19.7.tar.xz
+
+Prepare gettext for compilation, then build/ copy the necessary files:
+```bash
+    cd gettext-tools
+    EMACS="no" ./configure --prefix=/tools --disable-shared
+    make -C gnulib-lib
+    make -C intl pluralx.c
+    make -C src msgfmt
+    make -C src msgmerge
+    make -C src xgettext
+    cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin
+```
+---
+***A dependency problem which is wrong in the original book, you need install gperf first***
+
+## gperf-3.0.4.tar.gz
+
+gperf generates a perfect hash function from a key set.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| gperf         | 3.0.4         | gperf-3.0.4.tar.gz
+
+Prepare gperf for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+---
+
+## grep-2.23
+
+The grep package contains programs for searching through files.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| grep          | 2.23          | grep-2.23.tar.xz
+
+Prepare grep for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+## gzip-1.6
+
+The gzip package contains programs for searching through files.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| gzip          | 1.6           | gzip-1.6.tar.xz
+
+Prepare gzip for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+## M4-1.4.17
+
+The M4 package contains a macro processor.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| m4            | 1.4.17        | m4-1.4.17.tar.xz
+
+Prepare M4 for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+
+## make-4.1
+
+The make package contains a program for compiling packages.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| make          | 4.1           | make-4.1.tar.bz2
+
+Prepare make for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools --without-guile
+    make
+    make check
+    make install
+```
+
+## patch-2.7.5
+
+The patch package contains a program for modifying or creating files by applying a “patch” file typically created by the diff program.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| patch         | 2.7.5         | patch-2.7.5.tar.xz
+
+Prepare patch for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+
+## Perl-5.22.1
+The Perl package contains the Practical Extraction and Report Language.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| Perl          | 5.22.1        | perl-5.22.1.tar.bz2
+
+Prepare Perl for compilation:
+```bash
+    sh Configure -des -Dprefix=/tools -Dlibs=-lm
+```
+Build the package:
+```bash
+    make
+```
+Only a few of the utilities and libraries need to be installed at this time:
+```bash
+    cp -v perl cpan/podlators/pod2man /tools/bin
+    mkdir -pv /tools/lib/perl5/5.22.1
+    cp -Rv lib/* /tools/lib/perl5/5.22.1
+```
+## sed-4.2.2
+The sed package contains a stream editor.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| sed           | 4.2.2         | sed-4.2.2.tar.bz2
+
+Prepare sed for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+## tar-1.28
+The tar package contains an archiving program.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| tar           | 1.28          | tar-1.28.tar.xz
+
+Prepare tar for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+## texinfo-6.1
+The texinfo package contains programs for reading, writing, and converting info pages.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| texinfo       | 6.1           | texinfo-6.1.tar.xz
+
+Prepare texinfo for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+
+## util-linux-2.27.1
+The util-linux package contains miscellaneous utility programs.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| util-linux    | 2.27.1        | util-linux-2.27.1.tar.xz
+
+Prepare util-linux for compilation, then build/ install:
+```bash
+    ./configure --prefix=/tools                \
+                --without-python               \
+                --disable-makeinstall-chown    \
+                --without-systemdsystemunitdir \
+                PKG_CONFIG=""
+    make
+    make install
+
+```
+## Xz-5.2.2
+The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| Xz            | 5.2.2         | xz-5.2.2.tar.xz
+
+Prepare Xz for compilation, then build/ check/ install:
+```bash
+    ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+
+## Stripping
+The steps in this section are optional, but if the LFS partition is rather small, it is beneficial to learn that unnecessary items can be removed.
+```bash
+	strip --strip-debug /tools/lib/*
+    /usr/bin/strip --strip-unneeded /tools/{,s}bin/*
+```
+
+***Congratulations, all the procedure for constructing the temporary system is complete***
+---
+02-createTemporary.md - 0.8.20160707
