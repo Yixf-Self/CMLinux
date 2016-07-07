@@ -3,7 +3,7 @@ DIY a really tiny Linux from Sctrach
 
 ![flowchart](/resources/flowchart_0.5.20160706 .png)
 
-Build a Linux from **zero** to **hero**, we may follow the oringinal book of [Linux-From-Sctrach](http://www.linuxfromscratch.org/lfs/downloads/stable/LFS-BOOK-7.9-NOCHUNKS.html) version 7.9 to build a tiny but strong Linux, and I shall call it as CMLinux.
+Build a Linux from **zero** to **hero**, I will follow the oringinal book of [Linux-From-Sctrach](http://www.linuxfromscratch.org/lfs/downloads/stable/LFS-BOOK-7.9-NOCHUNKS.html) version 7.9 to build a tiny but strong Linux, and I shall call it as CMLinux.
 
 > 
 Our Goal is to make a Linux-From-Sctrach with basic tools and keeps it with high perfermance for ***VM*** usage.
@@ -43,7 +43,10 @@ No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 
 - First thing first, `git` and `GitHub`.
 - AMD64 localhost, VT or VT-x better.
-- VM Platform, KVM better.
+- VM Platform, KVM better. `Cent OS 7` and its previous versions are more friendly for building.
+- ***DO NOT USE UBUNTU x86_64 12.02+ as the localhost, there exists a series of fatal errors in pending cross-compile***
+
+![VM_for_build](VM_for_build.png)
 
 > If your localhost is Windows you may first deploy a Linux in VM as the platform for developing, recommending `Ubuntu`, a really friendly Linux with `apt`.
 
@@ -58,9 +61,9 @@ No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 
 # *Enjoy Yourself*
 
-Cherry Mill - My Original building process of CMLinux is performed on `Ubuntu Kylin` with `VS Code` and `bash`.
+Cherry Mill - My Original building process of CMLinux is performed on `Ubuntu Kylin` with `VS Code` and `bash`. With some bugs and failures, I choose a VM in `Cent OS 7` to cintinue the process.
 
 ![build_env_sample](/resources/build_env_sample.png)
 
 ---
-README.md - 0.51.20160707
+README.md - 0.6.20160708

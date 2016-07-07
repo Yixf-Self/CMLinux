@@ -1,4 +1,7 @@
 # 01 - localhost
+
+***DO NOT USE UBUNTU x86_64 12.02+ as the localhost, there exists a series of fatal errors in pending cross-compile***. You may put a `VM` first with `Cent OS`, which may help you avoid many mistakes.
+
 -  At the begining of the building process, you may first check your localhost with the packages and settings. All process below are carried out on `Ununtu 16.04`, if you are using `rpm` based distributions, you may only change the `apt-get` into `yum`, `dpkg` into `rpm` and so on.If you have the experience of deploying a Linux into your localhost, it is easy to complete the basic steps.Fix the problems by installing the packages and make the links right.
 ```bash
     ./scripts/version-check.sh | grep not```
@@ -69,4 +72,4 @@ Finally, to have the environment fully prepared for building the temporary tools
 ***Now, you have completed all the preparing process for the localhost, well done.***
 
 ---
-01-localhost.md - 0.81.20160707
+01-localhost.md - 0.82.20160708
