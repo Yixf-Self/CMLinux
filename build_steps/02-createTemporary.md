@@ -34,7 +34,7 @@ such as $LFS/sources/. **Do not put sources in $LFS/tools/**.
 
 ***Before each package, there shall be a simple table for its name and version, sample:***
 
-| package       | Version       | Package Name
+| Package       | Version       | Package Name
 | ------------- |-------------  |-------------
 | binutils      | 2.26          | binutils-2.26.tar.bz2
 
@@ -47,7 +47,7 @@ such as $LFS/sources/. **Do not put sources in $LFS/tools/**.
 ## binutils-2.26 - Pass 1
 The binutils package contains a linker, an assembler, and other tools for handling object files.
 
-| package       | Version       | Package Name
+| Package       | Version       | Package Name
 | ------------- |-------------  |-------------
 | binutils      | 2.26          | binutils-2.26.tar.bz2
 
@@ -109,7 +109,7 @@ Install the package:
 The gcc package contains the GNU compiler collection, which includes the C and C++ compilers.
 ***The configuration process of `gcc` needs `gmp`, `mpfr` and `mpc`***
 
-| package       | Version       | Package Name
+| Package       | Version       | Package Name
 | ------------- |-------------  |-------------
 | gcc           | 5.3.0         | gcc-5.3.0.tar.bz2
 | mpfr          | 3.1.3         | mpfr-3.1.3.tar.xz
@@ -205,7 +205,7 @@ When the process is done, compile and install:
 ## linux-4.4.2 API Headers
 The Linux API Headers (in linux-4.4.2.tar.xz) expose the kernel's API for use by glibc.
 
-| package       | Version       | Package Name
+| Package       | Version       | Package Name
 | ------------- |-------------  |-------------
 | linux-4.4.2 API Headers       |     | linux-4.4.2.tar.xz
 
@@ -223,7 +223,7 @@ Now extract the user-visible kernel headers from the source. They are placed in 
 ## glibc-2.23
 The glibc package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
-| package       | Version       | Package Name
+| Package       | Version       | Package Name
 | ------------- |-------------  |-------------
 | glibc      | 2.23          | glibc-2.23.tar.xz
 
@@ -295,7 +295,7 @@ If the output is not shown as above or there was no output at all, then somethin
 ## libstdc++-5.3.0
 `libstdc++` is the standard C++ library. It is needed for the correct operation of the `g++` compiler.libstdc++ is part of the gcc sources. You should first unpack the gcc tarball and change to the gcc-5.3.0 directory.
 
-| package       | Version       | Package Name
+| Package       | Version       | Package Name
 | ------------- |-------------  |-------------
 | libstdc++     | 5.3.0         | gcc-5.3.0.tar.bz2
 
@@ -326,7 +326,7 @@ When the process is done, compile and install:
 ## gcc-5.3.0 - Pass 2
 The gcc package contains the GNU compiler collection, which includes the C and C++ compilers.
 
-| package       | Version       | Package Name
+| Package       | Version       | Package Name
 | ------------- |-------------  |-------------
 | gcc           | 5.3.0         | gcc-5.3.0.tar.bz2
 | mpfr          | 3.1.3         | mpfr-3.1.3.tar.xz
@@ -413,7 +413,7 @@ If the output is not shown as above or there was no output at all, then somethin
 ## tcl-core8.6.4
 The `tcl` package contains the Tool Command Language which is a cross platform tool language working well with `C`.
 
-| package       | Version       | Package Name
+| Package       | Version       | Package Name
 | ------------- |-------------  |-------------
 | tcl-core      | 8.6.4         | tcl-core8.6.4-src.tar.gz
 
@@ -449,3 +449,110 @@ Install tcl's headers. The next package, Expect, requires them to build. Then ma
     make install-private-headers
     ln -sv tclsh8.6 /tools/bin/tclsh
 ```
+
+***You have ever completed the most hard part in building the toolchain, the tools below are easy to configure and install ***
+
+## expect-5.45
+The `expect` package contains a program for carrying out scripted dialogues with other interactive programs.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| expect        | 5.45          | expect5.45.tar.gz
+
+First, force `expect`'s configure script to use /bin/stty instead of a /usr/local/bin/stty it may find on the
+host system. This will ensure that our test suite tools remain sane for the final builds of our toolchain, then prepare it for compilaton:
+```bash
+    cp -v configure{,.orig}
+    sed 's:/usr/local/bin:/bin:' configure.orig > configure
+    ./configure --prefix=/tools           \
+                --with-tcl=/tools/lib     \
+                --with-tclinclude=/tools/include
+```
+
+The configure options are set to be including the tcl for testing. Then, build the package:
+```bash
+    make
+```
+Compilation is now complete. As discussed earlier, to run the Expect test suite anyway, issue the following command:
+```bash
+    make test
+```
+Note that the expect test suite is known to experience failures under certain host conditions that are not within our control. Therefore, test suite failures here are not surprising and are not considered critical. Now, install the package:
+```bash
+    make SCRIPTS="" install # prevent scripts not needed.
+```
+## DejaGNU-1.5.3
+The `DejaGNU` package contains a framework for testing other programs.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| DejaGNU       | 1.5.3         | dejagnu-1.5.3.tar.gz
+
+Prepare DejaGNU for compilation:
+```bash
+    ./configure --prefix=/tools
+```
+Build and install the package:
+```bash
+    make install
+```
+To test the results, issue:
+```bash
+    make check
+```
+## check-0.10.0
+
+check is a unit testing framework for C.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| check         | 0.10.0        | check-0.10.0.tar.gz
+
+
+Prepare check for compilation, then build/ check/ install:
+```bash
+    PKG_CONFIG= ./configure --prefix=/tools
+    make
+    make check
+    make install
+```
+
+## ncurses-6.0
+
+The Ncurses package contains libraries for terminal-independent handling of character screens.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| Ncurses       | 6.0           | ncurses-6.0.tar.gz
+
+First, ensure that gawk is found first during configuration:
+```bash
+    sed -i s/mawk// configure
+```
+Prepare ncurses for compilation, then build/ install:
+```bash
+    ./configure --prefix=/tools \
+                --with-shared   \
+                --without-debug \
+                --without-ada   \
+                --enable-widec  \
+                --enable-overwrite
+    make
+    make install
+```
+## bash-4.3.30.tar.gz
+The bash package contains the ***Bourne-Again Shell***.
+
+| Package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| bash          | 4.3.30        | bash-4.3.30.tar.gz
+
+Prepare bash package for compilation, then build/ test/ install, and make a symbol link:
+```bash
+    ./configure --prefix=/tools --without-bash-malloc
+    make
+    make tests
+    make install
+    ln -sv bash /tools/bin/sh
+```
+![bash_build](/resources/bash_build.png)
