@@ -46,7 +46,7 @@ No MORE requirements, and we will learn more from it.  -- from Linux with LOVE.
 - VM Platform, KVM better. `Cent OS 7` and its previous versions are more friendly for building.
 - ***DO NOT USE UBUNTU x86_64 12.02+ as the localhost, there exists a series of fatal errors in pending cross-compile***
 
-![VM_for_build](VM_for_build.png)
+![VM_for_build](/resources/VM_for_build.png)
 
 > If your localhost is Windows you may first deploy a Linux in VM as the platform for developing, recommending `Ubuntu`, a really friendly Linux with `apt`.
 
