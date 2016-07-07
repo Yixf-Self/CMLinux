@@ -55,7 +55,7 @@ Change your user into **lfs**, and we shall prepare some bash profiles.
 Make a `.bashrc` profile for user `lfs` initializting with these setting lines, you may `echo` the list into `~/.bashrc` like `echo <list> > ~/.bashrc` to create it
 ```bash
     umask 022
-    LFS=/mnt/lfs
+    LFS=***<Your Directory of lfs locol>***
     LC_ALL=POSIX
     LFS_TGT=$(uname -m)-lfs-linux-gnu
     PATH=/tools/bin:/bin:/usr/bin
@@ -69,4 +69,4 @@ Finally, to have the environment fully prepared for building the temporary tools
 ***Now, you have completed all the preparing process for the localhost, well done.***
 
 ---
-01-localhost.md - 0.8.20160707
+01-localhost.md - 0.81.20160707
