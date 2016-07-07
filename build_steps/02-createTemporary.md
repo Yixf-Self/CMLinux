@@ -115,7 +115,7 @@ The gcc package contains the GNU compiler collection, which includes the C and C
 | mpfr          | 3.1.3         | mpfr-3.1.3.tar.xz
 | gmp           | 6.1.0         | gmp-6.1.0.tar.xz
 | mpc           | 1.0.3         | mpc-1.0.3.tar.gz
-\*  The procedures are the same as every other chapter as explained earlier, First extract the gcc tarball from the sources directory and then change to the directory created. Only then should you proceed with the instructions below.
+\*  The procedures are the same as every other build process as explained earlier, First extract the gcc tarball from the sources directory and then change to the directory created. Only then should you proceed with the instructions below.
 ```bash
     tar -xf ../mpfr-3.1.3.tar.xz
     cp -vr ../mpfr-3.1.3 ./mpfr
@@ -177,16 +177,16 @@ The meaning of the configure options:
 Since a working C library is not yet available, this ensures that the inhibit_libc constant is defined when building libgcc. This prevents the compiling of any code that requires libc support.
 
 `--without-headers`     
-When creating a complete cross-compiler, GCC requires standard headers compatible with the target system. For our purposes these headers will not be needed. This switch prevents GCC from looking for them.
+When creating a complete cross-compiler, gcc requires standard headers compatible with the target system. For our purposes these headers will not be needed. This switch prevents gcc from looking for them.
 
 `--with-local-prefix=/tools`    
-The local prefix is the location in the system that GCC will search for locally installed include files. The default is /usr/local. Setting this to /tools helps keep the host location of /usr/local out of this GCC's search path.
+The local prefix is the location in the system that gcc will search for locally installed include files. The default is /usr/local. Setting this to /tools helps keep the host location of /usr/local out of this gcc's search path.
 
 `--with-native-system-header-dir=/tools/include`        
-By default GCC searches /usr/include for system headers. In conjunction with the sysroot switch, this would translate normally to $LFS/usr/include. However the headers that will be installed in the next two sections will go to $LFS/tools/include. This switch ensures that gcc will find them correctly. In the second pass of GCC, this same switch will ensure that no headers from the host system are found.
+By default gcc searches /usr/include for system headers. In conjunction with the sysroot switch, this would translate normally to $LFS/usr/include. However the headers that will be installed in the next two sections will go to $LFS/tools/include. This switch ensures that gcc will find them correctly. In the second pass of gcc, this same switch will ensure that no headers from the host system are found.
 
 `--disable-shared`      
-This switch forces GCC to link its internal libraries statically. We do this to avoid possible issues with the host system.
+This switch forces gcc to link its internal libraries statically. We do this to avoid possible issues with the host system.
 
 `--disable-decimal-float, --disable-threads, --disable-libatomic, --disable-libgomp, --disable-libquadmath, --disable-libssp, --disable-libvtv, --disable-libstdcxx`            
 These switches disable support for the decimal floating point extension, threading, libatomic, libgomp, libquadmath, libssp, libvtv, and the C++ standard library respectively. These features will fail to compile when building a cross-compiler and are not necessary for the task of cross-compiling the temporary libc.
@@ -219,4 +219,231 @@ Now extract the user-visible kernel headers from the source. They are placed in 
 ```bash
     make INSTALL_HDR_PATH=dest headers_install
     cp -rv dest/include/* /tools/include
+```
+## glibc-2.23
+The glibc package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
+
+| package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| glibc      | 2.23          | glibc-2.23.tar.xz
+
+The glibc documentation recommends building glibc in a dedicated build directory:
+```bash
+    mkdir -v ./build
+    cd       ./build
+```
+Next, prepare glibc for compilation:
+```bash
+../configure                             \
+      --prefix=/tools                    \
+      --host=$LFS_TGT                    \
+      --build=$(../scripts/config.guess) \
+      --disable-profile                  \
+      --enable-kernel=2.6.32             \
+      --enable-obsolete-rpc              \
+      --with-headers=/tools/include      \
+      libc_cv_forced_unwind=yes          \
+      libc_cv_ctors_header=yes           \
+      libc_cv_c_cleanup=yes
+```
+The meaning of the configure options:
+
+`--host=$LFS_TGT, --build=$(../scripts/config.guess)`   
+The combined effect of these switches is that Glibc's build system configures itself to cross-compile, using the cross-linker and cross-compiler in /tools.
+
+`--disable-profile`         
+This builds the libraries without profiling information. Omit this option if profiling on the temporary tools is necessary.
+
+`--enable-kernel=2.6.32`       
+This tells Glibc to compile the library with support for 2.6.32 and later Linux kernels. Workarounds for older kernels are not enabled.
+
+`--enable-obsolete-rpc`     
+This installs NIS and RPC related headers that are not installed by default. They are required to build gcc and by several BLFS packages.
+
+`--with-headers=/tools/include`     
+This tells Glibc to compile itself against the headers recently installed to the tools directory, so that it knows exactly what features the kernel has and can optimize itself accordingly.
+
+`libc_cv_forced_unwind=yes`     
+This means that the configure test for force-unwind support will fail, as it relies on a working linker. The libc_cv_forced_unwind=yes variable is passed in order to inform configure that force-unwind support is available without it having to run the test.
+
+`libc_cv_c_cleanup=yes`         
+Similarly, we pass libc_cv_c_cleanup=yes through to the configure script so that the test is skipped and C cleanup handling support is configured.
+
+`libc_cv_ctors_header=yes`      
+Similarly, we pass libc_cv_ctors_header=yes through to the configure script so that the test is skipped and gcc constructor support is configured.
+
+When the process is done, compile and install:
+```bash
+    make
+    make install
+```
+## Check before your next steps
+At this point, it is imperative to stop and ensure that the basic functions (compiling and linking) of the new toolchain are working as expected. To perform a sanity check, run the following commands:
+```bash
+    echo 'int main(){}' > test.c
+    $LFS_TGT-gcc test.c
+    readelf -l a.out | grep ': /tools'
+```
+If everything is working correctly, there should be ***no errors***, and the output of the last command will be of the form:
+```bash
+    [Requesting program interpreter: /tools/lib/ld-linux-x86-64.so.2]
+```
+If the output is not shown as above or there was no output at all, then something is wrong. Investigate and retrace the steps to find out where the problem is and correct it. This issue ***must*** be resolved before continuing on.Once all is well, clean up the test files:
+```bash
+    rm -v test.c a.out
+```
+## libstdc++-5.3.0
+`libstdc++` is the standard C++ library. It is needed for the correct operation of the `g++` compiler.libstdc++ is part of the gcc sources. You should first unpack the gcc tarball and change to the gcc-5.3.0 directory.
+
+| package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| libstdc++     | 5.3.0         | gcc-5.3.0.tar.bz2
+
+Create a ***separate*** build directory, it is another build process, for libstdc++ and enter it:
+```bash
+    mkdir -v ./build
+    cd       ./build
+```
+Prepare gcc for compilation:
+```bash
+../libstdc++-v3/configure           \
+    --host=$LFS_TGT                 \
+    --prefix=/tools                 \
+    --disable-multilib              \
+    --disable-nls                   \
+    --disable-libstdcxx-threads     \
+    --disable-libstdcxx-pch         \
+    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/5.3.0
+```
+
+All of the configure opinions of which have been appeared in previous process, and typically you shall have a basic known, if it is hard, carry on, you do not need to understand all in first time.
+
+When the process is done, compile and install:
+```bash
+    make
+    make install
+```
+## gcc-5.3.0 - Pass 2
+The gcc package contains the GNU compiler collection, which includes the C and C++ compilers.
+
+| package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| gcc           | 5.3.0         | gcc-5.3.0.tar.bz2
+| mpfr          | 3.1.3         | mpfr-3.1.3.tar.xz
+| gmp           | 6.1.0         | gmp-6.1.0.tar.xz
+| mpc           | 1.0.3         | mpc-1.0.3.tar.gz
+
+Our first build of `gcc` has installed a couple of ***internal system headers***. Some of the internal headers that gcc installed are partial, self-contained files and ***does not*** include the extended features of the system header. This was adequate for building the temporary libc, but this build of gcc now requires the full internal header. Create a full version of the internal header using a command that is identical to what the gcc build system does in normal circumstances:    
+Once again, change the location of `gcc`'s default dynamic linker to use the one installed in /tools.
+```bash
+    for file in \
+        $(find gcc/config -name linux64.h -o -name linux.h -o -name sysv4.h)
+        do
+            cp -uv $file{,.orig}
+            sed -e 's@/lib\(64\)\?\(32\)\?/ld@/tools&@g' \
+                -e 's@/usr@/tools@g' $file.orig > $file
+            echo '
+                #undef STANDARD_STARTFILE_PREFIX_1
+                #undef STANDARD_STARTFILE_PREFIX_2
+                #define STANDARD_STARTFILE_PREFIX_1 "/tools/lib/"
+                #define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
+            touch $file.orig
+        done
+```
+***The configuration process of `gcc` needs `gmp`, `mpfr` and `mpc`***
+```bash
+    tar -xf ../mpfr-3.1.3.tar.xz
+    cp -vr ../mpfr-3.1.3 ./mpfr
+    tar -xf ../gmp-6.1.0.tar.xz
+    cp -vr ../gmp-6.1.0 ./gmp
+    tar -xf ../mpc-1.0.3.tar.gz
+    cp -vr ../mpc-1.0.3 ./mpc
+```
+Create a ***separate new*** build directory, it is a rebuild process:
+```bash
+    mkdir -v ./build
+    cd       ./build
+```
+Now prepare gcc for compilation again:
+```bash
+CC=$LFS_TGT-gcc                                    \
+CXX=$LFS_TGT-g++                                   \
+AR=$LFS_TGT-ar                                     \
+RANLIB=$LFS_TGT-ranlib                             \
+../configure                                       \
+    --prefix=/tools                                \
+    --with-local-prefix=/tools                     \
+    --with-native-system-header-dir=/tools/include \
+    --enable-languages=c,c++                       \
+    --disable-libstdcxx-pch                        \
+    --disable-multilib                             \
+    --disable-bootstrap                            \
+    --disable-libgomp
+```
+The meaning of a special opinion:
+
+`--disable-bootstrap`   
+For native builds of gcc, the default is to do a "bootstrap" build. This does not just compile gcc, but compiles it several times. It uses the programs compiled in a first round to compile itself a second time, and then again a third time. The second and third iterations are compared to make sure it can reproduce itself flawlessly. This also implies that it was compiled correctly. However, the LFS build method should provide a solid compiler without the need to bootstrap each time.
+
+
+When the process is done, compile and install:
+```bash
+    make
+    make install
+```
+As a finishing touch, create a symlink. Many programs and scripts run `cc` instead of `gcc`, which is used to keep programs generic and therefore usable on all kinds of UNIX systems where the GNU C compiler is not always installed.
+```bash
+    ln -sv gcc /tools/bin/cc
+```
+## Check again before your next steps
+At this point, it is imperative to stop and ensure that the basic functions (compiling and linking) of the new toolchain are working as expected. To perform a sanity check, run the following commands:
+```bash
+    echo 'int main(){}' > test.c
+    cc test.c
+    readelf -l a.out | grep ': /tools'
+```
+If everything is working correctly, there should be ***no errors***, and the output of the last command will be of the form:
+```bash
+    [Requesting program interpreter: /tools/lib/ld-linux-x86-64.so.2]
+```
+If the output is not shown as above or there was no output at all, then something is wrong. Investigate and retrace the steps to find out where the problem is and correct it. This issue ***must*** be resolved before continuing on.Once all is well, clean up the test files:
+```bash
+    rm -v test.c a.out
+```
+## tcl-core8.6.4
+The `tcl` package contains the Tool Command Language which is a cross platform tool language working well with `C`.
+
+| package       | Version       | Package Name
+| ------------- |-------------  |-------------
+| tcl-core      | 8.6.4         | tcl-core8.6.4-src.tar.gz
+
+Note that the tcl package used here is a minimal version needed to run the LFS tests.
+
+Prepare tcl for compilation:
+```bash
+    cd ./unix
+    ./configure --prefix=/tools
+```
+Build the package:
+```bash
+    make
+```
+Compilation is now complete. As discussed earlier, running the test suite is not mandatory for the temporary tools here in this chapter. To run the tcl test suite anyway, issue the following command:
+```bash
+    TZ=UTC make test
+```
+The result may shown as below, and watch for failures:
+~[tcl_test_result](/resources/tcl_test_result.png)
+Install the package:
+```bash
+    make install
+```
+Make the installed library writable so debugging symbols can be removed later:
+```bash
+    chmod -v u+w /tools/lib/libtcl8.6.so
+```
+Install tcl's headers. The next package, Expect, requires them to build. Then make a necessary symbolic link:
+```bash
+    make install-private-headers
+    ln -sv tclsh8.6 /tools/bin/tclsh
 ```
